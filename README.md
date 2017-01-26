@@ -15,3 +15,5 @@ Class is: African elephant, Loxodonta africana
 Certainty is: 0.938018
 ```
 
+# Performance Metrics (@Top5, @Top1)
+I will be verifying and posting these performance metrics within the next week and a half (by 2/7/2016)
