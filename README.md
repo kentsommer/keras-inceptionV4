@@ -7,5 +7,12 @@ Inception-ResNet and the Impact of Residual Connections on Learning (Christian S
 
 Note this Keras implementation tries to follow the [tf.slim definition](https://github.com/tensorflow/models/blob/master/slim/nets/inception_v4.py) as closely as possible.
 
-If you find any typos or bugs in the definition please make an issue or a pull request so we can get it fixed!
+Pre-Trained weights for this Keras model can be found under "releases."
+
+Once you have downloaded the inception_v4_pretrained.h5, you can evaluate a sample image by performing the following:
+* ```$ python evaluate_image.py"```
+```
+Class is: African elephant, Loxodonta africana
+Certainty is: 0.938018
+```
 
