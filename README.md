@@ -9,7 +9,7 @@ Note this Keras implementation tries to follow the [tf.slim definition](https://
 Pre-Trained weights for this Keras model can be found here: https://github.com/kentsommer/keras-inceptionV4/releases
 
 Once you have downloaded the inception_v4_pretrained.h5, you can evaluate a sample image by performing the following:
-* ```$ python evaluate_image.py"```
+* ```$ python evaluate_image.py```
 ```
 Class is: African elephant, Loxodonta africana
 Certainty is: 0.938018
