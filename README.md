@@ -1,5 +1,5 @@
 # keras-inceptionV4
-Keras implementation of Google's inception v4 model
+Keras implementation of Google's inception v4 model with ported weights!
 
 As described in http://arxiv.org/abs/1602.07261.Inception-v4
 
