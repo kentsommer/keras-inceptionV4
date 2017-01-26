@@ -1,8 +1,6 @@
 from PIL import Image
 import inception_v4
 import numpy as np
-import operator
-import cv2
 import os
 
 os.environ['CUDA_VISIBLE_DEVICES'] = ''
