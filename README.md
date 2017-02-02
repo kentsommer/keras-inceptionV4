@@ -19,7 +19,9 @@ Certainty is: 0.868498
 # Performance Metrics (@Top5, @Top1)
 
 Error rate on non-blacklisted subset of ILSVRC2012 Validation Dataset:
-* Top@1 Error: 19.5426841909
-* Top@5 Error: 4.8861893113
+* Top@1 Error: 19.54%
+* Top@5 Error: 4.88%
 
-These error rates are actually slightly lower than the listed error rates in the paper.
+These error rates are actually slightly lower than the listed error rates in the paper:
+* Top@1 Error: 20.0%
+* Top@5 Error: 5.0%
