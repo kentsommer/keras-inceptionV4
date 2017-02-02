@@ -13,8 +13,7 @@ for layer in model.layers:
 		original_w = K.get_value(layer.W)
 		print("old_w shape: ", original_w.shape)
 		converted_w = convert_kernel(original_w)
-		converted_w = np.transpose(converted_w)
 		print("new_w shape: ", converted_w.shape)
 		K.set_value(layer.W, converted_w)
 
-model.save_weights('inception_v4_pretrained_theano_tf_dim_order.h5')
+model.save_weights('../weights/inception_v4_pretrained_theano_tf_dim_order.h5')
