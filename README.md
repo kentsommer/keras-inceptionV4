@@ -11,8 +11,9 @@ Pre-Trained weights for this Keras model can be found here: https://github.com/k
 Once you have downloaded the inception_v4_pretrained.h5, you can evaluate a sample image by performing the following:
 * ```$ python evaluate_image.py```
 ```
+Loaded Model Weights!
 Class is: African elephant, Loxodonta africana
-Certainty is: 0.938018
+Certainty is: 0.868498
 ```
 
 # Performance Metrics (@Top5, @Top1)
