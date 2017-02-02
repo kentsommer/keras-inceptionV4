@@ -17,4 +17,9 @@ Certainty is: 0.868498
 ```
 
 # Performance Metrics (@Top5, @Top1)
-I will be verifying and posting these performance metrics within the next week and a half (by 2/7/2017)
+
+Error rate on non-blacklisted subset of ILSVRC2012 Validation Dataset:
+* Top@1 Error: 19.5426841909
+* Top@5 Error: 4.8861893113
+
+These error rates are actually slightly lower than the listed error rates in the paper.
