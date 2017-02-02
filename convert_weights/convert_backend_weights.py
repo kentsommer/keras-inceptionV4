@@ -1,3 +1,6 @@
+import sys
+sys.path.insert(0,'..')
+
 from keras import backend as K
 from keras.utils.np_utils import convert_kernel
 import inception_v4
