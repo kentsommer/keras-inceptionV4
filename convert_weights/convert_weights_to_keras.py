@@ -2,14 +2,17 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import sys
+sys.path.insert(0,'..')
+
 import tensorflow as tf
-import inception_v4
 import numpy as np
 import itertools
 import pickle
-import sys
 import os
 import re
+
+import inception_v4
 
 os.environ['CUDA_VISIBLE_DEVICES'] = ''
 
@@ -63,7 +66,7 @@ if __name__ == "__main__":
 	setWeights(layers, weights)
 
 	# # Save model weights in h5 format
-	model.save_weights("inception_v4_pretrained.h5")
+	model.save_weights("../weights/inception_v4_pretrained.h5")
 	print("Finished saving weights in h5 format")
 
 

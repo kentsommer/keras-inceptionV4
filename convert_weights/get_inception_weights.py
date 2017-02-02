@@ -5,7 +5,7 @@ import pickle
 import numpy as np
 
 def get_weights():
-	checkpoint_file = './checkpoints/inception_v4.ckpt'
+	checkpoint_file = '../checkpoints/inception_v4.ckpt'
 	sess = tf.Session()
 	arg_scope = inception_v4_arg_scope()
 	input_tensor = tf.placeholder(tf.float32, (None, 299, 299, 3))
