@@ -1,14 +1,3 @@
-# News
-2/3/2017:
-
-1. This now fully supports both the Theano and Tensorflow backends! This means you can use whatever dim ordering you like as well as picking the backend you prefer! All of the following will output the same thing:
-  * tf_dim + Tensorflow
-  * th_dim + Tensorflow
-  * th_dim + Theano 
-  * tf_dim + Theano
-  
-2. Weights no longer have to be downloaded manually! Simply run the evaluate script and the correct weights will be downloaded automatically!
-
 # Keras Inception-V4
 Keras implementation of Google's inception v4 model with ported weights!
 
@@ -36,3 +25,14 @@ Error rate on non-blacklisted subset of ILSVRC2012 Validation Dataset (Single Cr
 These error rates are actually slightly lower than the listed error rates in the paper:
 * Top@1 Error: 20.0%
 * Top@5 Error: 5.0%
+
+# News
+2/3/2017:
+
+1. This now fully supports both the Theano and Tensorflow backends! This means you can use whatever dim ordering you like as well as picking the backend you prefer! All of the following will output the same thing:
+  * tf_dim + Tensorflow
+  * th_dim + Tensorflow
+  * th_dim + Theano 
+  * tf_dim + Theano
+  
+2. Weights no longer have to be downloaded manually! Simply run the evaluate script and the correct weights will be downloaded automatically!
