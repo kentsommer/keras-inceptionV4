@@ -1,1 +1,0 @@
-Please place the pre-trained weights in h5 format in this directory

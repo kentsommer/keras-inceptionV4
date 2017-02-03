@@ -1,14 +1,23 @@
-
-from keras.layers import Input, merge, Dropout, Dense, Flatten, Activation
+# Sys
+import warnings
+# Keras Core
 from keras.layers.convolutional import MaxPooling2D, Convolution2D, AveragePooling2D
+from keras.layers import Input, merge, Dropout, Dense, Flatten, Activation
 from keras.layers.normalization import BatchNormalization
 from keras.models import Model
-
+# Backend
 from keras import backend as K
+# Utils
+from keras.utils.layer_utils import convert_all_kernels_in_model
+from keras.utils.data_utils import get_file
+
 
 #########################################################################################
 # Implements the Inception Network v4 (http://arxiv.org/pdf/1602.07261v1.pdf) in Keras. #
 #########################################################################################
+
+TH_WEIGHTS_PATH = 'https://github.com/kentsommer/keras-inceptionV4/releases/download/1.0/inception-v4_weights_th_dim_ordering_th_kernels.h5'
+TF_WEIGHTS_PATH = 'https://github.com/kentsommer/keras-inceptionV4/releases/download/1.0/inception-v4_weights_tf_dim_ordering_tf_kernels.h5'
 
 def conv2d_bn(x, nb_filter, nb_row, nb_col,
               border_mode='same', subsample=(1, 1), bias=False):
@@ -199,7 +208,7 @@ def inception_v4_base(input):
     return net
 
 
-def inception_v4(num_classes, dropout_keep_prob, weights_path):
+def inception_v4(num_classes, dropout_keep_prob, weights):
     '''
     Creates the inception v4 network
 
@@ -235,12 +244,33 @@ def inception_v4(num_classes, dropout_keep_prob, weights_path):
 
     model = Model(inputs, predictions, name='inception_v4')
 
-    if weights_path:
-        model.load_weights(weights_path, by_name=True)
+    #load weights
+    if weights == 'imagenet':
+        if K.image_dim_ordering() == 'th':
+            weights_path = get_file('inception-v4_weights_th_dim_ordering_th_kernels.h5',
+                                    TH_WEIGHTS_PATH,
+                                    cache_subdir='models')
+            model.load_weights(weights_path, by_name=True)
+            if K.backend() == 'tensorflow':
+                warnings.warn('You are using the TensorFlow backend, yet you '
+                              'are using the Theano '
+                              'image dimension ordering convention '
+                              '(`image_dim_ordering="th"`). '
+                              'For best performance, set '
+                              '`image_dim_ordering="tf"` in '
+                              'your Keras config '
+                              'at ~/.keras/keras.json.')
+                convert_all_kernels_in_model(model)
+        else:
+            weights_path = get_file('inception-v4_weights_tf_dim_ordering_tf_kernels.h5',
+                                    TF_WEIGHTS_PATH,
+                                    cache_subdir='models')
+            model.load_weights(weights_path, by_name=True)
+            if K.backend() == 'theano':
+                convert_all_kernels_in_model(model)
         print("Loaded Model Weights!")
 
     return model
 
-
-def create_model(num_classes=1001, dropout_keep_prob=0.8, weights_path=None):
-	return inception_v4(num_classes, dropout_keep_prob, weights_path)
+def create_model(num_classes=1001, dropout_keep_prob=0.8, weights=None):
+	return inception_v4(num_classes, dropout_keep_prob, weights)

@@ -1,3 +1,4 @@
+from keras import backend as K
 import inception_v4
 import numpy as np
 import cv2
@@ -54,12 +55,16 @@ def get_processed_image(img_path):
 	im = central_crop(im, 0.875)
 	im = cv2.resize(im, (299, 299))
 	im = preprocess_input(im)
-	im = im.reshape(-1,299,299,3)
+	if K.image_dim_ordering() == "th":
+		im = np.transpose(im, (2,0,1))
+		im = im.reshape(-1,3,299,299)
+	else:
+		im = im.reshape(-1,299,299,3)
 	return im
 
 if __name__ == "__main__":
 	# Create model and load pre-trained weights
-	model = inception_v4.create_model(weights_path="weights/inception_v4_pretrained.h5")
+	model = inception_v4.create_model(weights='imagenet')
 
 	# Open Class labels dictionary. (human readable label given ID)
 	classes = eval(open('validation_utils/class_names.txt', 'r').read())
@@ -68,6 +73,7 @@ if __name__ == "__main__":
 	img_path = 'elephant.jpg'
 	img = get_processed_image(img_path)
 
+	# Run prediction on test image
 	preds = model.predict(img)
 	print("Class is: " + classes[np.argmax(preds)-1])
 	print("Certainty is: " + str(preds[0][np.argmax(preds)]))

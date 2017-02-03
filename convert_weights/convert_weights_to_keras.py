@@ -55,9 +55,6 @@ if __name__ == "__main__":
 	with open('weights.p', 'rb') as fp:
 		weights = pickle.load(fp)
 
-	layer_list = get_layers(model)
-	layer_list = list(itertools.chain.from_iterable(layer_list))
-
 	# Get layers to set
 	layers = get_layers(model)
 	layers = list(itertools.chain.from_iterable(layers))
@@ -65,8 +62,8 @@ if __name__ == "__main__":
 	# Set the layer weights
 	setWeights(layers, weights)
 
-	# # Save model weights in h5 format
-	model.save_weights("../weights/inception_v4_pretrained.h5")
+	# Save model weights in h5 format
+	model.save_weights("../weights/inception-v4_weights_tf_dim_ordering_tf_kernels.h5")
 	print("Finished saving weights in h5 format")
 
 

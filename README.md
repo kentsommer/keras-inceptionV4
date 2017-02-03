@@ -1,3 +1,12 @@
+# News
+2/3/2017: 
+1) This now fully supports both the Theano and Tensorflow backends! This means you can use whatever dim ordering you like as well as picking the backend you prefer! All of the following will output the same thing:
+  a) tf_dim + Tensorflow
+  b) th_dim + Tensorflow
+  c) th_dim + Theano 
+  d) tf_dim + Theano
+2) Weights no longer have to be downloaded manually! Simply run the evaluate script and the correct weights will be downloaded automatically!
+
 # Keras Inception-V4
 Keras implementation of Google's inception v4 model with ported weights!
 
@@ -8,7 +17,7 @@ Note this Keras implementation tries to follow the [tf.slim definition](https://
 
 Pre-Trained weights for this Keras model can be found here (ported from the tf.slim ckpt): https://github.com/kentsommer/keras-inceptionV4/releases
 
-Once you have downloaded the inception_v4_pretrained.h5, you can evaluate a sample image by performing the following:
+You can evaluate a sample image by performing the following (weights are downloaded automatically):
 * ```$ python evaluate_image.py```
 ```
 Loaded Model Weights!
