@@ -16,8 +16,8 @@ from keras.utils.data_utils import get_file
 # Implements the Inception Network v4 (http://arxiv.org/pdf/1602.07261v1.pdf) in Keras. #
 #########################################################################################
 
-TH_WEIGHTS_PATH = 'https://github.com/kentsommer/keras-inceptionV4/releases/download/1.0/inception-v4_weights_th_dim_ordering_th_kernels.h5'
-TF_WEIGHTS_PATH = 'https://github.com/kentsommer/keras-inceptionV4/releases/download/1.0/inception-v4_weights_tf_dim_ordering_tf_kernels.h5'
+TH_WEIGHTS_PATH = 'https://github.com/kentsommer/keras-inceptionV4/releases/download/2.0/inception-v4_weights_th_dim_ordering_th_kernels.h5'
+TF_WEIGHTS_PATH = 'https://github.com/kentsommer/keras-inceptionV4/releases/download/2.0/inception-v4_weights_tf_dim_ordering_tf_kernels.h5'
 
 def conv2d_bn(x, nb_filter, nb_row, nb_col,
               border_mode='same', subsample=(1, 1), bias=False):
