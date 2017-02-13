@@ -272,5 +272,5 @@ def inception_v4(num_classes, dropout_keep_prob, weights):
 
     return model
 
-def create_model(num_classes=1001, dropout_keep_prob=0.8, weights=None):
+def create_model(num_classes=1001, dropout_keep_prob=0.2, weights=None):
 	return inception_v4(num_classes, dropout_keep_prob, weights)
