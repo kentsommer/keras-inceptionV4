@@ -16,6 +16,18 @@ Class is: African elephant, Loxodonta africana
 Certainty is: 0.868498
 ```
 
+# News
+3/30/2017:
+
+1. I have released a Keras-2 compatible version of this network on the keras-2 branch. Note that this only supports the TensorFlow backend. 
+
+2. Included in the keras-2 branch is the ability to specify whether to include the top layers or not. 
+
+3. Once some issues with automatic weight conversion between backends is fixed in Keras 2, the keras-2 branch will be merged into master and should at that point support both Theano and TensorFlow. 
+
+
+
+
 # Performance Metrics (@Top5, @Top1)
 
 Error rate on non-blacklisted subset of ILSVRC2012 Validation Dataset (Single Crop):
@@ -25,14 +37,3 @@ Error rate on non-blacklisted subset of ILSVRC2012 Validation Dataset (Single Cr
 These error rates are actually slightly lower than the listed error rates in the paper:
 * Top@1 Error: 20.0%
 * Top@5 Error: 5.0%
-
-# News
-2/3/2017:
-
-1. This now fully supports both the Theano and Tensorflow backends! This means you can use whatever dim ordering you like as well as picking the backend you prefer! All of the following will output the same thing:
-  * tf_dim + Tensorflow
-  * th_dim + Tensorflow
-  * th_dim + Theano 
-  * tf_dim + Theano
-  
-2. Weights no longer have to be downloaded manually! Simply run the evaluate script and the correct weights will be downloaded automatically!
