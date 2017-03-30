@@ -55,7 +55,7 @@ def get_processed_image(img_path):
 	im = central_crop(im, 0.875)
 	im = cv2.resize(im, (299, 299))
 	im = preprocess_input(im)
-	if K.image_dim_ordering() == "th":
+	if K.image_data_format() == "channels_first":
 		im = np.transpose(im, (2,0,1))
 		im = im.reshape(-1,3,299,299)
 	else:
@@ -64,7 +64,7 @@ def get_processed_image(img_path):
 
 if __name__ == "__main__":
 	# Create model and load pre-trained weights
-	model = inception_v4.create_model(weights='imagenet')
+	model = inception_v4.create_model(weights='imagenet', include_top=True)
 
 	# Open Class labels dictionary. (human readable label given ID)
 	classes = eval(open('validation_utils/class_names.txt', 'r').read())

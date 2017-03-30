@@ -24,6 +24,8 @@ def natural_keys(myobject):
 
 def setWeights(layers, weights):
 	for index, layer in enumerate(layers):
+		if "dense" in layer.name:
+			continue
 		layer.set_weights(weights[index])
 		print(layer.name + " weights have been set!")
 	print("Finished Setting Weights!")
@@ -37,7 +39,7 @@ def get_layers(model):
 		try:
 			layer = model.layers[i]
 			if layer.trainable:
-				bad = ["pooling", "flatten", "dropout", "activation"]
+				bad = ["pooling", "flatten", "dropout", "activation", "concatenate"]
 				if not any(word in layer.name for word in bad):
 					result.append(layer)
 		except:
@@ -63,7 +65,7 @@ if __name__ == "__main__":
 	setWeights(layers, weights)
 
 	# Save model weights in h5 format
-	model.save_weights("../weights/inception-v4_weights_tf_dim_ordering_tf_kernels.h5")
+	model.save_weights("../weights/inception-v4_weights_tf_dim_ordering_tf_kernels_notop.h5")
 	print("Finished saving weights in h5 format")
 
 
