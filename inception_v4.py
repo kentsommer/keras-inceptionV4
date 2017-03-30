@@ -259,12 +259,14 @@ def inception_v4(num_classes, dropout_keep_prob, weights, include_top):
             weights_path = get_file(
                 'inception-v4_weights_tf_dim_ordering_tf_kernels.h5',
                 WEIGHTS_PATH,
-                cache_subdir='models')
+                cache_subdir='models',
+                md5_hash='9fe79d77f793fe874470d84ca6ba4a3b')
         else:
             weights_path = get_file(
                 'inception-v4_weights_tf_dim_ordering_tf_kernels_notop.h5',
                 WEIGHTS_PATH_NO_TOP,
-                cache_subdir='models')
+                cache_subdir='models',
+                md5_hash='9296b46b5971573064d12e4669110969')
         model.load_weights(weights_path, by_name=True)
         if K.backend() == 'theano':
             warnings.warn('The Theano backend is not currently supported for '
