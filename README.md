@@ -23,7 +23,7 @@ Certainty is: 0.868498
 
 2. Included in the keras-2 branch is the ability to specify whether to include the top layers or not. 
 
-3. Once some issues with automatic weight conversion between backends is fixed in Keras 2, the keras-2 branch will be merged into master and should at that point support both Theano and TensorFlow. 
+3. Once some issues with automatic weight conversion between backends is fixed in Keras 2, the keras-2 branch will be merged into master and should, at that point, support both Theano and TensorFlow. 
 
 
 
