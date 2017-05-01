@@ -40,11 +40,11 @@ def central_crop(image, central_fraction):
 	img_shape = image.shape
 	depth = img_shape[2]
 	fraction_offset = int(1 / ((1 - central_fraction) / 2.0))
-	bbox_h_start = np.divide(img_shape[0], fraction_offset)
-	bbox_w_start = np.divide(img_shape[1], fraction_offset)
+	bbox_h_start = int(np.divide(img_shape[0], fraction_offset))
+	bbox_w_start = int(np.divide(img_shape[1], fraction_offset))
 
-	bbox_h_size = img_shape[0] - bbox_h_start * 2
-	bbox_w_size = img_shape[1] - bbox_w_start * 2
+	bbox_h_size = int(img_shape[0] - bbox_h_start * 2)
+	bbox_w_size = int(img_shape[1] - bbox_w_start * 2)
 
 	image = image[bbox_h_start:bbox_h_start+bbox_h_size, bbox_w_start:bbox_w_start+bbox_w_size]
 	return image
