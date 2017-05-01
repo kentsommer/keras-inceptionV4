@@ -1,3 +1,5 @@
+import numpy as np
+
 # Sys
 import warnings
 # Keras Core
@@ -16,6 +18,13 @@ from keras.utils.data_utils import get_file
 #########################################################################################
 # Implements the Inception Network v4 (http://arxiv.org/pdf/1602.07261v1.pdf) in Keras. #
 #########################################################################################
+
+def preprocess_input(x):
+    x = np.divide(x, 255.0)
+    x = np.subtract(x, 1.0)
+    x = np.multiply(x, 2.0)
+    return x
+
 
 WEIGHTS_PATH = 'https://github.com/kentsommer/keras-inceptionV4/releases/download/2.1/inception-v4_weights_tf_dim_ordering_tf_kernels.h5'
 WEIGHTS_PATH_NO_TOP = 'https://github.com/kentsommer/keras-inceptionV4/releases/download/2.1/inception-v4_weights_tf_dim_ordering_tf_kernels_no_top.h5'
