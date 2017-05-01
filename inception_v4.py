@@ -185,7 +185,7 @@ def inception_v4_base(input):
 
     # 35 x 35 x 384
     # 4 x Inception-A blocks
-    for idx in xrange(4):
+    for idx in range(4):
     	net = block_inception_a(net)
 
     # 35 x 35 x 384
@@ -194,7 +194,7 @@ def inception_v4_base(input):
 
     # 17 x 17 x 1024
     # 7 x Inception-B blocks
-    for idx in xrange(7):
+    for idx in range(7):
     	net = block_inception_b(net)
 
     # 17 x 17 x 1024
@@ -203,7 +203,7 @@ def inception_v4_base(input):
 
     # 8 x 8 x 1536
     # 3 x Inception-C blocks
-    for idx in xrange(3):
+    for idx in range(3):
     	net = block_inception_c(net)
 
     return net
