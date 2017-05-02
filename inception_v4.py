@@ -1,3 +1,5 @@
+import numpy as np
+
 # Sys
 import warnings
 # Keras Core
@@ -17,8 +19,15 @@ from keras.utils.data_utils import get_file
 # Implements the Inception Network v4 (http://arxiv.org/pdf/1602.07261v1.pdf) in Keras. #
 #########################################################################################
 
+def preprocess_input(x):
+    x = np.divide(x, 255.0)
+    x = np.subtract(x, 1.0)
+    x = np.multiply(x, 2.0)
+    return x
+
+
 WEIGHTS_PATH = 'https://github.com/kentsommer/keras-inceptionV4/releases/download/2.1/inception-v4_weights_tf_dim_ordering_tf_kernels.h5'
-WEIGHTS_PATH_NO_TOP = 'https://github.com/kentsommer/keras-inceptionV4/releases/download/2.1/inception-v4_weights_tf_dim_ordering_tf_kernels_no_top.h5'
+WEIGHTS_PATH_NO_TOP = 'https://github.com/kentsommer/keras-inceptionV4/releases/download/2.1/inception-v4_weights_tf_dim_ordering_tf_kernels_notop.h5'
 
 def conv2d_bn(x, nb_filter, num_row, num_col,
               padding='same', strides=(1, 1), use_bias=False):
@@ -185,7 +194,7 @@ def inception_v4_base(input):
 
     # 35 x 35 x 384
     # 4 x Inception-A blocks
-    for idx in xrange(4):
+    for idx in range(4):
     	net = block_inception_a(net)
 
     # 35 x 35 x 384
@@ -194,7 +203,7 @@ def inception_v4_base(input):
 
     # 17 x 17 x 1024
     # 7 x Inception-B blocks
-    for idx in xrange(7):
+    for idx in range(7):
     	net = block_inception_b(net)
 
     # 17 x 17 x 1024
@@ -203,7 +212,7 @@ def inception_v4_base(input):
 
     # 8 x 8 x 1536
     # 3 x Inception-C blocks
-    for idx in xrange(3):
+    for idx in range(3):
     	net = block_inception_c(net)
 
     return net
