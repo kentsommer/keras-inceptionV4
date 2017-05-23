@@ -17,13 +17,15 @@ Certainty is: 0.868498
 ```
 
 # News
-3/30/2017:
+5/23/2017:
 
-1. I have released a Keras-2 compatible version of this network on the keras-2 branch. Note that this only supports the TensorFlow backend. 
-
-2. Included in the keras-2 branch is the ability to specify whether to include the top layers or not. 
-
-3. Once some issues with automatic weight conversion between backends is fixed in Keras 2, the keras-2 branch will be merged into master and should, at that point, support both Theano and TensorFlow. 
+* Enabled support for both Theano and Tensorflow (again... :neckbeard:)
+* Added useful training parameters 
+  * l2 regularization added to conv layers
+  * Variance Scaling initialization added to conv layers
+  * Momentum value updated for batch_norm layers
+* Updated pre-processing to match paper (subtracts 0.5 instead of 1.0 :fire:)
+* Minor code changes and cleanup is also included in the recent changes
 
 
 
