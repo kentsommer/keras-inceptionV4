@@ -4,13 +4,10 @@ import numpy as np
 import cv2
 import os
 
+
+# If you want to use a GPU set its index here
 os.environ['CUDA_VISIBLE_DEVICES'] = ''
 
-def preprocess_input(x):
-    x = np.divide(x, 255.0)
-    x = np.subtract(x, 1.0)
-    x = np.multiply(x, 2.0)
-    return x
 
 # This function comes from Google's ImageNet Preprocessing Script
 def central_crop(image, central_fraction):
@@ -49,12 +46,13 @@ def central_crop(image, central_fraction):
 	image = image[bbox_h_start:bbox_h_start+bbox_h_size, bbox_w_start:bbox_w_start+bbox_w_size]
 	return image
 
+
 def get_processed_image(img_path):
 	# Load image and convert from BGR to RGB
 	im = np.asarray(cv2.imread(img_path))[:,:,::-1]
 	im = central_crop(im, 0.875)
 	im = cv2.resize(im, (299, 299))
-	im = preprocess_input(im)
+	im = inception_v4.preprocess_input(im)
 	if K.image_data_format() == "channels_first":
 		im = np.transpose(im, (2,0,1))
 		im = im.reshape(-1,3,299,299)

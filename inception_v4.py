@@ -7,6 +7,8 @@ from keras.layers.convolutional import MaxPooling2D, Convolution2D, AveragePooli
 from keras.layers import Input, Dropout, Dense, Flatten, Activation
 from keras.layers.normalization import BatchNormalization
 from keras.layers.merge import concatenate
+from keras import regularizers
+from keras import initializers
 from keras.models import Model
 # Backend
 from keras import backend as K
@@ -19,15 +21,16 @@ from keras.utils.data_utils import get_file
 # Implements the Inception Network v4 (http://arxiv.org/pdf/1602.07261v1.pdf) in Keras. #
 #########################################################################################
 
+WEIGHTS_PATH = 'https://github.com/kentsommer/keras-inceptionV4/releases/download/2.1/inception-v4_weights_tf_dim_ordering_tf_kernels.h5'
+WEIGHTS_PATH_NO_TOP = 'https://github.com/kentsommer/keras-inceptionV4/releases/download/2.1/inception-v4_weights_tf_dim_ordering_tf_kernels_notop.h5'
+
+
 def preprocess_input(x):
     x = np.divide(x, 255.0)
-    x = np.subtract(x, 1.0)
+    x = np.subtract(x, 0.5)
     x = np.multiply(x, 2.0)
     return x
 
-
-WEIGHTS_PATH = 'https://github.com/kentsommer/keras-inceptionV4/releases/download/2.1/inception-v4_weights_tf_dim_ordering_tf_kernels.h5'
-WEIGHTS_PATH_NO_TOP = 'https://github.com/kentsommer/keras-inceptionV4/releases/download/2.1/inception-v4_weights_tf_dim_ordering_tf_kernels_notop.h5'
 
 def conv2d_bn(x, nb_filter, num_row, num_col,
               padding='same', strides=(1, 1), use_bias=False):
@@ -42,10 +45,13 @@ def conv2d_bn(x, nb_filter, num_row, num_col,
     x = Convolution2D(nb_filter, (num_row, num_col),
                       strides=strides,
                       padding=padding,
-                      use_bias=use_bias)(x)
-    x = BatchNormalization(axis=channel_axis, scale=False)(x)
+                      use_bias=use_bias,
+                      kernel_regularizer=regularizers.l2(0.00004),
+                      kernel_initializer=initializers.VarianceScaling(scale=2.0, mode='fan_in', distribution='normal', seed=None))(x)
+    x = BatchNormalization(axis=channel_axis, momentum=0.9997, scale=False)(x)
     x = Activation('relu')(x)
     return x
+
 
 def block_inception_a(input):
     if K.image_data_format() == 'channels_first':
@@ -241,7 +247,6 @@ def inception_v4(num_classes, dropout_keep_prob, weights, include_top):
 
 
     # Final pooling and prediction
-
     if include_top:
         # 1 x 1 x 1536
         x = AveragePooling2D((8,8), padding='valid')(x)
@@ -277,11 +282,8 @@ def inception_v4(num_classes, dropout_keep_prob, weights, include_top):
                 cache_subdir='models',
                 md5_hash='9296b46b5971573064d12e4669110969')
         model.load_weights(weights_path, by_name=True)
-        if K.backend() == 'theano':
-            warnings.warn('The Theano backend is not currently supported for '
-            			  'this model on Keras 2. Please use the TensorFlow  '
-            			  'backend or you will get bad results!')
     return model
 
+
 def create_model(num_classes=1001, dropout_prob=0.2, weights=None, include_top=True):
-	return inception_v4(num_classes, dropout_prob, weights, include_top)
+    return inception_v4(num_classes, dropout_prob, weights, include_top)
