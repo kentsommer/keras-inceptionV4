@@ -27,7 +27,6 @@ def get_weights():
 					value = sess.run(key)
 					if y == 1:
 						current_bn = []
-						current_bn.append(np.ones(value.shape[-1]))
 						current_bn.append(value)
 					elif y == 2:
 						current_bn.append(value)

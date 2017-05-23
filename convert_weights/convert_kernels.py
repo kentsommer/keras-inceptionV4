@@ -24,7 +24,7 @@ def get_layers(model):
 		try:
 			layer = model.layers[i]
 			if layer.trainable:
-				bad = ["pooling", "flatten", "dropout", "activation"]
+				bad = ["pooling", "flatten", "dropout", "activation", "concatenate"]
 				if not any(word in layer.name for word in bad):
 					result.append(layer)
 		except:
@@ -37,7 +37,7 @@ def get_layers(model):
 
 K.set_image_dim_ordering('tf')
 
-th_model = inception_v4.create_model(weights_path="../weights/inception-v4_weights_tf_dim_ordering_tf_kernels.h5")
+th_model = inception_v4.create_model(weights="../weights/inception-v4_weights_tf_dim_ordering_tf_kernels.h5")
 
 convert_all_kernels_in_model(th_model)
 print("Converted all Kernels")

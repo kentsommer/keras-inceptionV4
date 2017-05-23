@@ -37,7 +37,7 @@ def get_layers(model):
 		try:
 			layer = model.layers[i]
 			if layer.trainable:
-				bad = ["pooling", "flatten", "dropout", "activation"]
+				bad = ["pooling", "flatten", "dropout", "activation", "concatenate"]
 				if not any(word in layer.name for word in bad):
 					result.append(layer)
 		except:
@@ -77,6 +77,7 @@ for index, th_layer in enumerate(th_layers):
 	# 	weights[0] = shuffle_rows(weights[0])
 	# 	th_layer.set_weights(weights)
 	# 	print('converted ', th_layer.name)
+	# elif th_layer.__class__.__name__ not in bad_classes:
 	else:
 		th_layer.set_weights(weights_list[index])
 		print('Set: ', th_layer.name)
