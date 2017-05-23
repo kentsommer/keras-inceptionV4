@@ -60,6 +60,7 @@ def get_processed_image(img_path):
 		im = im.reshape(-1,299,299,3)
 	return im
 
+
 if __name__ == "__main__":
 	# Create model and load pre-trained weights
 	model = inception_v4.create_model(weights='imagenet', include_top=True)
